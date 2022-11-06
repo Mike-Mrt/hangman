@@ -5,14 +5,14 @@ This is an implementation of the Hangman game, where the computer thinks of a wo
 
 This version of the hangman game has used Python and its packages to construct a UI for the player. 
 
-## Milestone 1: Create variables for the game
+## Milestone 2: Create variables for the game
 
-Milestone 1 was used to create the list of possible words for the hangman game:
-- The list was assigned to a variable and the random module was imported and the choice() method was used to selected a random word from the list and these have both been printed to output
+Milestone 2 was used to create the list of possible words for the hangman game:
+- The list was assigned to a variable and the random module was imported and the choice() method was used to selected a random word from the list and these have both been printed to output.
 - For the hangman game to be initiated, user input was designed to get input from the user of 1 character.
 - Conditional logic was then used to determine if the input from the user is a valid input so has to have a length of 1 and in the alphabet.
 - To do the above, the string module was imported as it is much more efficient to do this than write all of the alphabet in lower and upper case within a list.
-- Code and accompanying description is provided below for Milestone 1, which will be streamlined more as the milestones progress:
+- Code and accompanying description is provided below for Milestone 2, which will be streamlined more as the milestones progress:
   
 ```python
 # Importing the random module:
@@ -41,23 +41,39 @@ else:
 
 > ![](/readme_files/Milestone1.png)
 
-## Milestone 2
+## Milestone 3: Check if the guessed chracter is in the word
 
-- Does what you have built in this milestone connect to the previous one? If so explain how. What technologies are used? Why have you used them? Have you run any commands in the terminal? If so insert them using backticks (To get syntax highlighting for code snippets add the language after the first backticks).
+Milestone 2 was used to create 2 functions that will aid in the running of the game:
+- The 'check_guess' functons which takes in the guessed string as a parameter, converts this into lower case and then checks if the letter is in the word or not.
+- The 'ask_for_input' function asks the user for input until the guessed value is valid (length of 1 and a letter). 
+- Once valid, the guess moves on and check_guess method is called to check if the guess is in the word.
+- Code and accompanying description is provided below for Milestone 3, which will be streamlined more as the milestones progress:
 
-- Example below:
-
-```bash
-/bin/kafka-topics.sh --list --zookeeper 127.0.0.1:2181
-```
-
-- The above command is used to check whether the topic has been created successfully, once confirmed the API script is edited to send data to the created kafka topic. The docker container has an attached volume which allows editing of files to persist on the container. The result of this is below:
 
 ```python
-"""Insert your code here"""
+# Checking the guessed letter by the player:
+def check_guess(guess):
+    letter = guess.lower()
+    if letter in word_list:
+        print(f"Good guess! {letter} is in the word.")
+    else:
+        print(f"Sorry, {letter} is not in the word. Try again.")
+
+# Asking the user for input:
+def ask_for_input():
+    while True:
+        # Asking user to guess a character and assigning to variable
+        guess = input("Guess a letter: ")
+        # Checking if guess is valid
+        if len(guess)==1 and guess in list(string.ascii_letters):
+            break
+        else:
+            print("Invalid letter. Please, enter a single alphabetical character.")
+    
+    check_guess(guess)
 ```
 
-> Insert screenshot of what you have built working.
+> ![](/readme_files/Mileston3.png)
 
 ## Milestone n
 
@@ -72,3 +88,4 @@ else:
 - Read through your documentation, do you understand everything you've written? Is everything clear and cohesive?
 
 [def]: image.png
+[def2]: /readme_files/Milestone3.png
