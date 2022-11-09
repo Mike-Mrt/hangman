@@ -1,5 +1,6 @@
 # Imports for the script:
 import random
+import string
 
 # defining the __init__ method for the Hangman class:
 class Hangman:
@@ -15,14 +16,17 @@ class Hangman:
         guess = guess.lower()
         if guess in self.word:
             print(f"Good guess! {guess} is in the word.")
-        else:
-            print('NOOOOOO')
 
-test1 = Hangman(['apple','pineapple','orange'], 5)
-print(test1.word)
-test1.check_guess('p')
-
-
+    def ask_for_input(self):
+        while True:
+            guess = input("Please guess a letter that you think is in the word: ")
+            if len(guess) != 1 or guess not in list(string.ascii_letters):
+                print("Invalid letter. Please, enter a single alphabetical character.")
+            elif guess in self.list_of_guesses:
+                print("You already tried that letter!")
+            else:
+                self.check_guess(guess)
+                self.list_of_guesses.append(guess)
 
 
 
@@ -35,3 +39,4 @@ test1.check_guess('p')
 # print(test1.word_guessed)
 # print(test1.num_letters)
 # print(test1.list_of_guesses)
+# test1.ask_for_input()
