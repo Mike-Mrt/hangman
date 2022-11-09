@@ -43,7 +43,7 @@ else:
 
 ## Milestone 3: Check if the guessed chracter is in the word
 
-Milestone 2 was used to create 2 functions that will aid in the running of the game:
+Milestone 3 was used to create 3 functions that will aid in the running of the game:
 - The 'check_guess' functons which takes in the guessed string as a parameter, converts this into lower case and then checks if the letter is in the word or not.
 - The 'ask_for_input' function asks the user for input until the guessed value is valid (length of 1 and a letter). 
 - Once valid, the guess moves on and check_guess method is called to check if the guess is in the word.
@@ -75,11 +75,67 @@ def ask_for_input():
 
 > ![](/readme_files/Mileston3.png)
 
-## Milestone n
+## Milestone 4: Create the Game class
 
-- Continue this process for every milestone, making sure to display clear understanding of each task and the concepts behind them as well as understanding of the technologies used.
+Milestone 4 was used to create the Hangman class, instantiate the attributes and defining the functions check_guess and ask_for_input:
+- The random and string modules were imported to support the build of the Hangman class.
+- Several attributes were initialised, these include:
+    - word: The word to be guessed, picked randomly from the word_list. Remember to import the random module into your script.
+    - word_guessed: list - A list of the letters of the word, with _ for each letter not yet guessed. For example, if the word is 'apple', the word_guessed list would be ['_', '_', '_', '_', '_']. If the player guesses 'a', the list would be ['a', '_', '_', '_', '_'].
+    - num_letters: int - The number of UNIQUE letters in the word that have not been guessed yet.
+    - num_lives: int - The number of lives the player has at the start of the game
+    - word_list: list - A list of words.
+    - list_of_guesses: list - A list of the guesses that have already been tried. Set this to an empty list initially.
+- check_guess instance method was created to check whether the guess was in the word or not and added conditional logic for each scenario
+- ask_for_input instance method was created to continuously ask the user for input (of a letter)
+- These methods included checks to ensure validity of the guesses and actions for each scenario of whether it was a valid single alphabetical letter, if the letter had already been guessed and then actions for when the guessed letter is in and not in the word
+- Code and accompanying description is provided below for Milestone 3, which will be streamlined more as the milestones progress:
 
-- Also don't forget to include code snippets and screenshots of the system you are building, it gives proof as well as it being an easy way to evidence your experience!
+```python
+# Imports for the script:
+import random
+import string
+
+# defining the __init__ method for the Hangman class:
+class Hangman:
+    def __init__(self, word_list, num_lives=5):
+        self.word_list = word_list
+        self.num_lives = num_lives
+        self.word = random.choice(word_list)
+        self.word_guessed = ['_']*len(self.word)
+        self.num_letters = len(set(self.word))
+        self.list_of_guesses = []
+    
+    # Method to check if guess is in the word and to populate word_guessed if so otherwise remove life
+    def check_guess(self, guess):
+        guess = guess.lower()
+        if guess in self.word:
+            print(f"Good guess! {guess} is in the word.")
+            for i,letter in enumerate(self.word):
+                if guess == letter:
+                    self.word_guessed[i] = letter
+                    return self.word_guessed
+            self.num_letters -= 1
+        else:
+            self.num_lives -= 1
+            print(f"Sorry, {guess} is not in the word.")
+            print(f"You have {self.num_lives} lives left.")
+        self.list_of_guesses.append(guess)
+
+
+    # Method which asks the user for input (a letter) continuously until the while loop is broken
+    def ask_for_input(self):
+        while True:
+            guess = input("Please guess a letter that you think is in the word: ")
+            if len(guess) != 1 or guess not in list(string.ascii_letters):
+                print("Invalid letter. Please, enter a single alphabetical character.")
+            elif guess in self.list_of_guesses:
+                print("You already tried that letter!")
+            else:
+                self.check_guess(guess)
+                self.list_of_guesses.append(guess)
+```
+> ![](/readme_files/Milestone4.png)
 
 ## Conclusions
 
