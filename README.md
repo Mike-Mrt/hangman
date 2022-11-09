@@ -221,4 +221,4 @@ if __name__ == '__main__':
 
 The Hangman class was created and its attributes initialised. Within this class methods were created to support the running of the game and then a final method outside of the class was creatd to create an instance of the class everytime a user wanted to play the game. 
 
-The game could be improved through the use of better visualisations instead of using the terminal. 
+The game could be improved through creating a longer list of words that the player can guess from and the use of better visualisations instead of using the terminal. 
