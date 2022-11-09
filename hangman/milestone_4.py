@@ -8,10 +8,19 @@ class Hangman:
         self.num_lives = num_lives
         self.word = random.choice(word_list)
         self.word_guessed = ['_']*len(self.word)
-        self.num_letters = set(self.word)
+        self.num_letters = len(set(self.word))
         self.list_of_guesses = []
 
+    def check_guess(self, guess):
+        guess = guess.lower()
+        if guess in self.word:
+            print(f"Good guess! {guess} is in the word.")
+        else:
+            print('NOOOOOO')
 
+test1 = Hangman(['apple','pineapple','orange'], 5)
+print(test1.word)
+test1.check_guess('p')
 
 
 
