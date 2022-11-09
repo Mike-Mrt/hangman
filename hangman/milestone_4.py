@@ -12,7 +12,7 @@ class Hangman:
         self.num_letters = len(set(self.word))
         self.list_of_guesses = []
     
-    # Method ot check if guess is in the word and to populate word_guessed if so otherwise remove life
+    # Method to check if guess is in the word and to populate word_guessed if so otherwise remove life
     def check_guess(self, guess):
         guess = guess.lower()
         if guess in self.word:
@@ -21,7 +21,13 @@ class Hangman:
                 if guess == letter:
                     self.word_guessed[i] = letter
                     return self.word_guessed
-        self.num_letters -= 1
+            self.num_letters -= 1
+        else:
+            self.num_lives -= 1
+            print(f"Sorry, {guess} is not in the word.")
+            print(f"You have {self.num_lives} lives left.")
+        self.list_of_guesses.append(guess)
+
 
     # Method which asks the user for input (a letter) continuously until the while loop is broken
     def ask_for_input(self):
@@ -39,12 +45,12 @@ class Hangman:
 
 
 # testing the initialisation of attributes: 
-test1 = Hangman(['apple','pineapple','orange'], 5)
+# test1 = Hangman(['apple','pineapple','orange'], 5)
 # print(test1.word_list)
 # print(test1.num_lives)
-print(test1.word)
+# print(test1.word)
 # print(test1.word_guessed)
 # print(test1.num_letters)
-print(test1.list_of_guesses)
-print(test1.num_letters)
-test1.ask_for_input()
+# print(test1.list_of_guesses)
+# print(test1.num_letters)
+# test1.ask_for_input()
